@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    #timer {
+      font-size: 2em;
+      color: black;
+      font-weight: bold;
+      transition: color 0.5s ease-in-out;
+    }
+
+    #image {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div id="timer"></div>
+<img id="image" src="image.png" alt="Image">
+
+<script>
+  function startTimer() {
+    let seconds = 30;
+    const timerElement = document.getElementById('timer');
+    const imageElement = document.getElementById('image');
+
+    const countdown = setInterval(function () {
+      timerElement.textContent = seconds;
+      
+      if (seconds <= 10) {
+        timerElement.style.color = 'red';
+      }
+
+      if (seconds <= 0) {
+        clearInterval(countdown);
+        timerElement.style.display = 'none';
+        imageElement.style.display = 'block';
+
+        setTimeout(function () {
+          timerElement.style.display = 'block';
+          imageElement.style.display = 'none';
+          timerElement.style.color = 'black';
+          startTimer();
+        }, 1);
+      }
+
+      seconds--;
+    }, 1000);
+  }
+
+  // Start the timer when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', startTimer);
+</script>
+
+</body>
+</html>
